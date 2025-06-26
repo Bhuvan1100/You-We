@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/home';
+// import Login from './pages/Login';
+// import Signup from './pages/Signup';
 
-
-function App() {
- 
-
+const App = () => {
   return (
-    <>
-      <div className='bg-blue-100'>hellow this is a chat app</div> 
-    </>
-  )
-}
+    <Routes>
+      <Route path="/" element={<Home />} />
+      {/* <Route path="/login" element={<Login />} /> */}
+      {/* <Route path="/signup" element={<Signup />} /> */}
+    </Routes>
+  );
+};
 
-export default App
+export default App;
