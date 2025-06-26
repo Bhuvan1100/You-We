@@ -3,6 +3,8 @@ import Home from './pages/home';
 import Login from './components/logIn';
 import Signup from './components/signUp';
 import VerifyEmail from './components/verifyEmail';
+import Main from './pages/main';
+
 const App = () => {
   return (
     <Routes>
@@ -10,6 +12,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/verify" element={<VerifyEmail/>}/>
+      <Route path="/main" element={<Main/>}/>
     </Routes>
   );
 };

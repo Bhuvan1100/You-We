@@ -4,6 +4,8 @@ import { auth } from "../firebase";
 import { createUserWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useUserStore from "../store/userStore";
+import { updateProfile } from "firebase/auth";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -39,6 +41,9 @@ const Signup = () => {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(userCred.user);
       toast.success("Verification email sent");
+      await updateProfile(auth.currentUser, {
+      displayName: formData.name, 
+      });
       setTimeout(() => navigate("/verify"), 2000);
     } catch (err) {
       toast.error(err.message);
@@ -53,20 +58,35 @@ const handleGoogleSignup = async () => {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    await fetch("http://localhost:5000/api/auth/google-signup", {
+    const response = await fetch("http://localhost:5173/api/auth/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: user.displayName,
-        email: user.email
+        email: user.email,
+        loginMethod: "google",
       }),
     });
+
+    if (!response.ok) throw new Error("Backend failed to create user");
+
+    const data = await response.json();
+
+    
+    useUserStore.getState().setUser({
+      name: data.name,
+      email: data.email,
+    });
+
+    // Optional: if backend sends full data (bio, profilePhoto, _id, etc.)
+    useUserStore.getState().setBackendData(data);
 
     navigate("/main");
   } catch (err) {
     toast.error("Google sign-in failed");
   }
 };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">

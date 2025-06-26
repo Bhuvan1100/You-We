@@ -5,6 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useThemeStore from "../store/themeStore";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../store/userStore";
+
+
 
 const VerifyEmail = () => {
   const { darkMode, toggleDarkMode } = useThemeStore();
@@ -25,37 +28,51 @@ const VerifyEmail = () => {
   }, [timer]);
 
   
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      await auth.currentUser?.reload();
-      if (auth.currentUser?.emailVerified) {
-        toast.success("Email verified successfully!");
+ useEffect(() => {
+  const interval = setInterval(async () => {
+    await auth.currentUser?.reload();
+
+    if (auth.currentUser?.emailVerified) {
+      toast.success("Email verified successfully!");
+
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/sign-up", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: auth.currentUser.displayName || "We&I User",
+            email: auth.currentUser.email,
+            loginMethod: "email",
+          }),
+        });
+
+        if (!res.ok) throw new Error("Failed to save user in backend");
+        const data = await res.json();
 
         
-        try {
-          await fetch("http://localhost:5000/api/auth/email-signup", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: auth.currentUser.displayName || "We&I User",
-              email: auth.currentUser.email,
-            }),
-          });
+        useUserStore.getState().setUser({
+          name: data.name,
+          email: data.email,
 
-          
-          navigate("/main");
-        } catch (err) {
-          toast.error("Backend error while saving user!");
-        }
+        });
 
-        clearInterval(interval); 
+        // Optional: if your backend returns more user data (like _id, bio, etc.)
+        useUserStore.getState().setBackendData(data);
+
+        navigate("/main");
+      } catch (err) {
+        toast.error("Backend error while saving user!");
       }
-    }, 5000); 
 
-    return () => clearInterval(interval);
-  }, []);
+      clearInterval(interval);
+    }
+  }, 5000); 
+
+  return () => clearInterval(interval);
+}, []);
+
 
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60)

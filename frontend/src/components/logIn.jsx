@@ -12,6 +12,8 @@ import "react-toastify/dist/ReactToastify.css";
 import useThemeStore from "../store/themeStore";
 import { Moon, Sun } from "lucide-react";
 
+import useUserStore from "../store/userStore";
+
 const Login = () => {
   const { darkMode, toggleDarkMode } = useThemeStore();
   const navigate = useNavigate();
@@ -26,37 +28,91 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const { email, password } = formData;
 
-    if (!email || !password) {
-      toast.error("Please fill all fields");
+
+
+
+  const handleLogin = async (e) => {
+  e.preventDefault();
+  const { email, password } = formData;
+
+  if (!email || !password) {
+    toast.error("Please fill all fields");
+    return;
+  }
+
+  try {
+    setLoading(true);
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    toast.success("Login successful");
+
+    // Hit your backend to get user info
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      toast.error(data.error || "Backend login failed");
       return;
     }
 
-    try {
-      setLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-      toast.success("Login successful");
-      setTimeout(() => navigate("/main"), 1500);
-    } catch (err) {
-      toast.error(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    
+    useUserStore.getState().setUser({
+      name: data.name,
+      email: data.email,
+    });
 
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      toast.success("Google login successful");
-      setTimeout(() => navigate("/main"), 1000);
-    } catch (err) {
-      toast.error("Google sign-in failed");
+    setTimeout(() => navigate("/main"), 1500);
+  } catch (err) {
+    toast.error(err.message || "Firebase login failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+
+const handleGoogleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    toast.success("Google login successful");
+
+    // Call backend to fetch existing user info
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: user.email }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      toast.error(data.error || "Backend login failed");
+      return;
     }
-  };
+
+    useUserStore.getState().setUser({
+      name: data.name,
+      email: data.email,
+    });
+
+    setTimeout(() => navigate("/main"), 1000);
+  } catch (err) {
+    toast.error("Google sign-in failed");
+  }
+};
+
+
+
 
   return (
     <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"}`}>
