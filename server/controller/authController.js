@@ -7,7 +7,11 @@ const handleSignup = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(200).json({ message: 'User already exists' });
+      return res.status(200).json({
+        message: 'User already exists',
+        name: existingUser.name,
+        email: existingUser.email,
+      });
     }
 
     const newUser = new User({
@@ -18,12 +22,17 @@ const handleSignup = async (req, res) => {
 
     await newUser.save();
 
-    return res.status(201).json({ message: 'User created' });
+    return res.status(201).json({
+      message: 'User created',
+      name: newUser.name,
+      email: newUser.email,
+    });
   } catch (err) {
     console.error('Signup error:', err.message);
     return res.status(500).json({ error: 'Server error' });
   }
 };
+
 
 
 const handleLogin = async (req, res) => {

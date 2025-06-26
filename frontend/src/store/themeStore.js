@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 const useThemeStore = create((set) => ({
-  darkMode: false,
+  darkMode: true,
   toggleDarkMode: () =>
     set((state) => ({
       darkMode: !state.darkMode,
