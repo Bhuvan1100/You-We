@@ -47,29 +47,26 @@ const Signup = () => {
     }
   };
 
-  const handleGoogleSignup = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      const defaultNickname = `linkuser_${Math.floor(Math.random() * 10000)}`;
+const handleGoogleSignup = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
 
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/google-signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: user.displayName,
-          email: user.email,
-          nickname: defaultNickname,
-          profilePhoto: user.photoURL || undefined
-        }),
-      });
+    await fetch("http://localhost:5000/api/auth/google-signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: user.displayName,
+        email: user.email
+      }),
+    });
 
-      navigate("/main");
-    } catch (err) {
-      toast.error("Google sign-in failed");
-    }
-  };
+    navigate("/main");
+  } catch (err) {
+    toast.error("Google sign-in failed");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">

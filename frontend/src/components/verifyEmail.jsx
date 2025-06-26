@@ -4,12 +4,15 @@ import { sendEmailVerification } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useThemeStore from "../store/themeStore";
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
   const { darkMode, toggleDarkMode } = useThemeStore();
   const [timer, setTimer] = useState(300); // 5 minutes
   const [canResend, setCanResend] = useState(false);
+  const navigate = useNavigate();
 
+  
   useEffect(() => {
     if (timer <= 0) {
       setCanResend(true);
@@ -20,6 +23,39 @@ const VerifyEmail = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, [timer]);
+
+  
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      await auth.currentUser?.reload();
+      if (auth.currentUser?.emailVerified) {
+        toast.success("Email verified successfully!");
+
+        
+        try {
+          await fetch("http://localhost:5000/api/auth/email-signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: auth.currentUser.displayName || "We&I User",
+              email: auth.currentUser.email,
+            }),
+          });
+
+          
+          navigate("/main");
+        } catch (err) {
+          toast.error("Backend error while saving user!");
+        }
+
+        clearInterval(interval); 
+      }
+    }, 5000); 
+
+    return () => clearInterval(interval);
+  }, []);
 
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60)
@@ -34,7 +70,7 @@ const VerifyEmail = () => {
       await sendEmailVerification(auth.currentUser);
       toast.success("Verification email resent successfully.");
       setCanResend(false);
-      setTimer(300); // reset timer
+      setTimer(300);
     } catch (error) {
       toast.error("Failed to send email. Try again later.");
     }
