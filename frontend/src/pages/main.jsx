@@ -7,7 +7,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const handleNavigation = (type) => {
-    if (type === "one") navigate("/chat/one-to-one");
+    if (type === "one") navigate("/chat/one-to-one-chat");
     else navigate("/chat/group");
   };
   console.log(user.name);
