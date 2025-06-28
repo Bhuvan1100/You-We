@@ -5,12 +5,13 @@ import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
 import { handleSocketConnection } from './socket/oneToOneHnadler.js'; 
-
+import { handleGroupChat } from './socket/groupChatHandler.js';
 import authRoutes from './routes/auth.js';
 
 dotenv.config();
 const app = express();
-
+app.use(cors());
+app.use(express.json());
 const httpServer = http.createServer(app);
 
 const io = new Server(httpServer, {
@@ -22,10 +23,10 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log("⚡ New Socket.IO connection:", socket.id);
   handleSocketConnection(io, socket);
+  handleGroupChat(io,socket);
 });
 
-app.use(cors());
-app.use(express.json());
+
 
 app.get('/', (req, res) => {
   res.send('API is running...');

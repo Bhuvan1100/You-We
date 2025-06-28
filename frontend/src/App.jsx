@@ -5,7 +5,8 @@ import Signup from './components/signUp';
 import VerifyEmail from './components/verifyEmail';
 import Main from './pages/main';
 import OneToOneChat from './components/oneToOneChat';
-
+import GroupRoom from './components/groupChat';
+import GroupTopic from './components/groupTopic';
 const App = () => {
   return (
     <Routes>
@@ -15,6 +16,8 @@ const App = () => {
       <Route path="/verify" element={<VerifyEmail/>}/>
       <Route path="/main" element={<Main/>}/>
       <Route path="/chat/one-to-one-chat" element={<OneToOneChat/>}/>
+      <Route path="/chat/group" element={<GroupTopic />} />
+      <Route path="/chat/group-room/:topic" element={<GroupRoom />} />
     </Routes>
   );
 };
