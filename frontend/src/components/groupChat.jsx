@@ -32,7 +32,7 @@ const GroupRoom = () => {
       return;
     }
 
-    if (socketRef.current?.connected) {
+    if (socketRef.current?.connected){
       return;
     }
 
