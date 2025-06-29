@@ -20,9 +20,7 @@ const App = () => {
       <Route
         path="/verify"
         element={
-          <PrivateRoute>
             <VerifyEmail />
-          </PrivateRoute>
         }
       />
       <Route
