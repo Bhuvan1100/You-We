@@ -96,7 +96,7 @@ const GroupRoom = () => {
       });
     });
 
-    // Handle user leave notifications
+    
     socket.on("user-left", ({ user: leftUser, timestamp, messageId }) => {
       setMessages((prev) => {
         
