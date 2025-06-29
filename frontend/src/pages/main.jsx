@@ -115,7 +115,7 @@ const Main = () => {
 
         {/* Chat Options */}
         <div className="grid gap-6 md:grid-cols-3">
-          {/* One-to-One Chat */}
+          
           <div 
             onClick={() => handleNavigation("one")}
             className={`group relative cursor-pointer rounded-xl p-6 transition-all hover:scale-105 ${
