@@ -13,7 +13,7 @@ A modern full-stack chat app built with React, Zustand, Socket.io, and Node.js. 
 - ⚡ **Real-time Messaging with Socket.io**
 - 🧠 **State Management using Zustand**
 - 🎯 **Protected Routes**
-- 📩 **Email Verification using Nodemailer**
+- 📩 **Email Verification using Firebase**
 - 🧑‍🎨 Clean, modern UI with animations and transitions
 
 ---
