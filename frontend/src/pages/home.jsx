@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 const Home = memo(() => {
   const { darkMode, toggleDarkMode } = useThemeStore();
   const [isLoaded, setIsLoaded] = useState(true);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
 
 
