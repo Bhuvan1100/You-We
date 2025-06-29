@@ -33,7 +33,7 @@ A modern full-stack chat app built with React, Zustand, Socket.io, and Node.js. 
 - [Express.js](https://expressjs.com/)
 - [Socket.io](https://socket.io/)
 - [Mongoose + MongoDB](https://mongoosejs.com/)
-- [Nodemailer](https://nodemailer.com/)
+  
 
 ---
 
