@@ -4,7 +4,8 @@ const useUserStore = create((set) => ({
   user: null,               // Firebase user object
   backendData: null,        // Data from MongoDB backend
   isLoggedIn: false,        // Auth state
-  loading: true,            // App-level loading indicator
+  loading: true,   
+  admin: false,         
 
   setUser: (user) =>
     set({
@@ -32,6 +33,9 @@ const useUserStore = create((set) => ({
     }),
 
   setLoading: (status) => set({ loading: status }),
+
+  setAdmin: (isAdmin) => set(() => ({ admin: isAdmin })),
 }));
+
 
 export default useUserStore;

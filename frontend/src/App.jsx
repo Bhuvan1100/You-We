@@ -8,7 +8,8 @@ import OneToOneChat from './components/oneToOneChat';
 import GroupRoom from './components/groupChat';
 import GroupTopic from './components/groupTopic';
 import PrivateRoute from './components/protectedRoute';
-
+import RoomPage from './components/roomPage';
+import PersonalizedChat from './components/personalizedRoom';
 const App = () => {
   return (
     <Routes>
@@ -52,6 +53,22 @@ const App = () => {
         element={
           <PrivateRoute>
             <GroupRoom />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/chat/roomPage"
+        element={
+          <PrivateRoute>
+            <RoomPage/>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/chat/personalizedroom/:roomId"
+        element={
+          <PrivateRoute>
+            <PersonalizedChat/>
           </PrivateRoute>
         }
       />

@@ -6,6 +6,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import { handleSocketConnection } from './socket/oneToOneHnadler.js'; 
 import { handleGroupChat } from './socket/groupChatHandler.js';
+import {handlePersonalizedRoom} from './socket/handlePersonalizedRoom.js';
 import authRoutes from './routes/auth.js';
 
 dotenv.config();
@@ -24,6 +25,7 @@ io.on("connection", (socket) => {
   console.log("⚡ New Socket.IO connection:", socket.id);
   handleSocketConnection(io, socket);
   handleGroupChat(io,socket);
+  handlePersonalizedRoom(io,socket);
 });
 
 

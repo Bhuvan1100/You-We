@@ -3,6 +3,7 @@ import { MessageCircle, Users, ChevronRight, Home, Moon, Sun, LogOut, User } fro
 import useUserStore from "../store/userStore";
 import useThemeStore from "../store/themeStore";
 import { useNavigate } from "react-router-dom";
+import RoomPage from "../components/roomPage";
 const Main = () => {
  
   const {user} = useUserStore();
@@ -17,7 +18,7 @@ const Main = () => {
     } else if (type === "group") {
       navigate("/chat/group")
     } else if (type === "room") {
-      navigate("/chat/personalized");
+      navigate("/chat/roomPage");
     }
   };
 
