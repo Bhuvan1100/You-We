@@ -6,15 +6,38 @@ A modern full-stack chat app built with React, Zustand, Socket.io, and Node.js. 
 
 ## ✨ Features
 
-- 🔐 **Authentication System** (Signup, Login, Email Verification)
-- 👥 **One-to-One Private Chat**
-- 💬 **Group Chat by Topic**
-- 🌙 **Dark/Light Theme Toggle**
-- ⚡ **Real-time Messaging with Socket.io**
-- 🧠 **State Management using Zustand**
-- 🎯 **Protected Routes**
-- 📩 **Email Verification using Firebase**
-- 🧑‍🎨 Clean, modern UI with animations and transitions
+🚀 Features of the Chat App
+
+🔐 Authentication System
+Signup, Login, and Email Verification
+
+👥 One-to-One Private Chat
+Chat privately with any user in real time
+
+💬 Group Chat by Topic
+Join or create topic-based group conversations
+
+🏠 Personalized Rooms with Admin Access
+Users can create custom rooms with a unique ID
+Admins can remove users or end the session at any time
+
+🌙 Dark/Light Theme Toggle
+Seamless theme switching with Zustand-based state management
+
+⚡ Real-time Messaging
+Instant message updates via Socket.IO
+
+🧠 Global State Management
+Lightweight and scalable state control using Zustand
+
+🔒 Protected Routes
+Only authenticated users can access chat pages
+
+📩 Email Verification
+Secure registration flow powered by Firebase
+
+🎨 Clean, Modern UI
+Polished interface with smooth animations and responsive design
 
 ---
 
