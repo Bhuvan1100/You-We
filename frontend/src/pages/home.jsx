@@ -76,15 +76,15 @@ const Home = memo(() => {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-slate-950' : 'bg-white'} overflow-hidden`}>
-      {/* Background Elements */}
-      <div className="fixed inset-0 pointer-events-none">
+      
+      /*<div className="fixed inset-0 pointer-events-none">
         {/* Gradient Orbs */}
-        <div className={`absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-20 ${darkMode ? 'bg-gradient-to-br from-indigo-500 to-purple-600' : 'bg-gradient-to-br from-indigo-300 to-purple-400'} blur-3xl animate-pulse`}></div>
-        <div className={`absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-20 ${darkMode ? 'bg-gradient-to-tr from-emerald-500 to-cyan-600' : 'bg-gradient-to-tr from-emerald-300 to-cyan-400'} blur-3xl animate-pulse`} style={{ animationDelay: '1s' }}></div>
+        {/* <div className={`absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-20 ${darkMode ? 'bg-gradient-to-br from-indigo-500 to-purple-600' : 'bg-gradient-to-br from-indigo-300 to-purple-400'} blur-3xl animate-pulse`}></div>
+        <div className={`absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-20 ${darkMode ? 'bg-gradient-to-tr from-emerald-500 to-cyan-600' : 'bg-gradient-to-tr from-emerald-300 to-cyan-400'} blur-3xl animate-pulse`} style={{ animationDelay: '1s' }}></div> */}
         
         
         
-      </div>
+      </div>*/
 
       {/* Header */}
       <header className="relative z-10">
@@ -323,18 +323,7 @@ const Home = memo(() => {
         </div>
       </footer>
 
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .bg-gradient-radial {
-          background: radial-gradient(circle, var(--tw-gradient-stops));
-        }
-      `}</style>
+      
     </div>
   );
 });
