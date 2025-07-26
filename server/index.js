@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
 
 
 app.use(cors({
-  origin: 'https://youandwe.netlify.app/',
+  origin: 'https://youandwe.netlify.app',
   credentials: true, // if you're using cookies/auth
 }));
 
