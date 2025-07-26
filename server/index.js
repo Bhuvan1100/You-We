@@ -8,7 +8,6 @@ import { handleSocketConnection } from './socket/oneToOneHnadler.js';
 import { handleGroupChat } from './socket/groupChatHandler.js';
 import {handlePersonalizedRoom} from './socket/handlePersonalizedRoom.js';
 import authRoutes from './routes/auth.js';
-import cors from 'cors'
 
 dotenv.config();
 const app = express();
@@ -32,7 +31,7 @@ io.on("connection", (socket) => {
 
 app.use(cors({
   origin: 'https://youandwe.netlify.app',
-  credentials: true, // if you're using cookies/auth
+  credentials: true, 
 }));
 
 app.get('/', (req, res) => {
