@@ -29,6 +29,10 @@ io.on("connection", (socket) => {
 });
 
 
+app.use(cors({
+  origin: 'https://youandwe.netlify.app/',
+  credentials: true, // if you're using cookies/auth
+}));
 
 app.get('/', (req, res) => {
   res.send('API is running...');
