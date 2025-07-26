@@ -24,7 +24,7 @@ export default function OneToOneChat() {
   }, [messages]);
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:5000");
+    socketRef.current = io(import.meta.env.VITE_BASE_URL);
     const socket = socketRef.current;
 
     socket.on("connect", () => {

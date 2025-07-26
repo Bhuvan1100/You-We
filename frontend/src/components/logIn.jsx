@@ -47,7 +47,7 @@ const Login = () => {
     toast.success("Login successful");
 
     // Hit your backend to get user info
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ const handleGoogleLogin = async () => {
     toast.success("Google login successful");
 
     // Call backend to fetch existing user info
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

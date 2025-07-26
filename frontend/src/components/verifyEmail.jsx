@@ -36,7 +36,7 @@ const VerifyEmail = () => {
       toast.success("Email verified successfully!");
 
       try {
-        const res = await fetch("http://localhost:5000/api/auth/sign-up", {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/sign-up`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

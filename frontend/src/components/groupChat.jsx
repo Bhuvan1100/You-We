@@ -35,7 +35,7 @@ const GroupRoom = () => {
       return;
     }
 
-    socketRef.current = io("http://localhost:5000", {
+    socketRef.current = io(import.meta.env.VITE_BASE_URL, {
     });
 
     const socket = socketRef.current;

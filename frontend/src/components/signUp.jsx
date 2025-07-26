@@ -63,7 +63,7 @@ const Signup = () => {
 
       
 
-      const response = await fetch("http://localhost:5000/api/auth/sign-up", {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/sign-up`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -82,7 +82,6 @@ const Signup = () => {
         email: data.email,
       });
 
-     
 
       navigate("/main");
     } catch (err) {
