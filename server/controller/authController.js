@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+import User from '../models/Users.js';
 
 
 const handleSignup = async (req, res) => {
