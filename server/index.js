@@ -8,6 +8,7 @@ import { handleSocketConnection } from './socket/oneToOneHnadler.js';
 import { handleGroupChat } from './socket/groupChatHandler.js';
 import {handlePersonalizedRoom} from './socket/handlePersonalizedRoom.js';
 import authRoutes from './routes/auth.js';
+import cors from 'cors'
 
 dotenv.config();
 const app = express();

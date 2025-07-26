@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-     "start": "node index.js",        
-      "dev": "nodemon index.js",       
-    "client": "cd ../frontend && npm run dev", 
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "client": "cd ../frontend && npm run dev",
     "server": "node index.js"
   },
   "author": "Bhuvan",
