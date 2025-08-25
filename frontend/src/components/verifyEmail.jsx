@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useThemeStore from "../store/themeStore";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../store/userStore";
+import { getTokenAndSave } from "./jwtservice";
 
 
 
@@ -57,6 +58,7 @@ const VerifyEmail = () => {
           email: data.email,
 
         });
+        await getTokenAndSave(data.email)
 
         // Optional: if your backend returns more user data (like _id, bio, etc.)
         useUserStore.getState().setBackendData(data);

@@ -8,6 +8,7 @@ import useUserStore from "../store/userStore";
 import useThemeStore from "../store/themeStore";
 import { updateProfile } from "firebase/auth";
 import { FiSun, FiMoon } from "react-icons/fi";
+import { getTokenAndSave } from "./jwtservice";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ const Signup = () => {
         name: data.name,
         email: data.email,
       });
+       await getTokenAndSave(data.email)
 
 
       navigate("/main");

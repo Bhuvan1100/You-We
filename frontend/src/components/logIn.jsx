@@ -11,6 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useThemeStore from "../store/themeStore";
 import { Moon, Sun } from "lucide-react";
+import { getTokenAndSave } from "./jwtservice";
 
 import useUserStore from "../store/userStore";
 
@@ -67,6 +68,8 @@ const Login = () => {
       email: data.email,
     });
 
+    await getTokenAndSave(data.email)
+
     setTimeout(() => navigate("/main"), 1500);
   } catch (err) {
     toast.error(err.message || "Firebase login failed");
@@ -104,6 +107,7 @@ const handleGoogleLogin = async () => {
       name: data.name,
       email: data.email,
     });
+     await getTokenAndSave(data.email)
 
     setTimeout(() => navigate("/main"), 1000);
   } catch (err) {

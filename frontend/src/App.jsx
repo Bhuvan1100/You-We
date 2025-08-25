@@ -11,9 +11,23 @@ import PrivateRoute from './components/protectedRoute';
 import RoomPage from './components/roomPage';
 import PersonalizedChat from './components/personalizedRoom';
 const App = () => {
+
+
+  const verifyToken = useUserStore((state) => state.verifyToken);
+
+   useEffect(() => {
+    const checkUser = async () => {
+      await verifyToken();
+    };
+    checkUser();
+  }, []);
+
+
+
+
   return (
     <Routes>
-
+      
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
