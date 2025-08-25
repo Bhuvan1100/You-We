@@ -8,7 +8,6 @@ import { handleSocketConnection } from './socket/oneToOneHnadler.js';
 import { handleGroupChat } from './socket/groupChatHandler.js';
 import {handlePersonalizedRoom} from './socket/handlePersonalizedRoom.js';
 import authRoutes from './routes/auth.js';
-import { verify } from 'crypto';
 import jwtRoutes from './routes/jwt.js'
 dotenv.config();
 const app = express();
@@ -38,9 +37,9 @@ app.use(cors({
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
-
-app.use('/api/auth', authRoutes);
 app.use('/api/jwt', jwtRoutes )
+app.use('/api/auth', authRoutes);
+
 
 connectDB();
 
