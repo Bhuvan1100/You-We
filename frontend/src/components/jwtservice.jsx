@@ -8,7 +8,7 @@ export async function getTokenAndSave(email) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
     });
-
+    console.log("API response:", data);
     const data = await res.json();
     if (data.token) {
       localStorage.setItem("jwtToken", data.token);
