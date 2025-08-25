@@ -30,9 +30,14 @@ io.on("connection", (socket) => {
 
 
 app.use(cors({
-  origin: 'https://youandwe.netlify.app',
-  credentials: true, 
+  origin: [
+    'http://localhost:5173',   // vite default
+    'http://localhost:5000',   // react default
+    'https://youandwe.netlify.app'
+  ],
+  credentials: true,
 }));
+
 
 app.get('/', (req, res) => {
   res.send('API is running...');
