@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import Home from './pages/home';
 import Login from './components/logIn';
 import Signup from './components/signUp';
@@ -11,7 +12,7 @@ import PrivateRoute from './components/protectedRoute';
 import RoomPage from './components/roomPage';
 import PersonalizedChat from './components/personalizedRoom';
 import useUserStore from './store/userStore';
-import { useEffect } from 'react';
+
 const App = () => {
 
 
