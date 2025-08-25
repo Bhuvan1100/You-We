@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
-app.use('/api/jwt/', jwtRoutes )
+app.use('/api/jwt', jwtRoutes )
 
 connectDB();
 
