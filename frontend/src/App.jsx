@@ -10,6 +10,7 @@ import GroupTopic from './components/groupTopic';
 import PrivateRoute from './components/protectedRoute';
 import RoomPage from './components/roomPage';
 import PersonalizedChat from './components/personalizedRoom';
+import useUserStore from './store/userStore';
 const App = () => {
 
 
